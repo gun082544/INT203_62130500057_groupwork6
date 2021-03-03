@@ -1,0 +1,137 @@
+<!doctype html>
+<html>
+<!-- Vue CDN -->
+<script src="https://unpkg.com/vue@next"></script>
+<head>
+    <meta charset='utf-8'>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <title>Instagram</title>
+    <link href='https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-alpha1/dist/css/bootstrap.min.css' rel='stylesheet'>
+    <link href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css' rel='stylesheet'>
+    <style>
+        body {
+            background-color: #0173ff
+        }
+
+        .height-100 {
+            height: 100vh
+        }
+
+        .dots {
+            height: 20px;
+            width: 20px;
+            background-color: green;
+            border-radius: 50%;
+            border: 2px solid #fff;
+            right: -4px;
+            bottom: 8px
+        }
+
+        .box-ellipse {
+            background-color: #ebedf0;
+            padding-right: 10px;
+            color: #000;
+            padding-left: 10px;
+            padding-top: 2px;
+            padding-bottom: 2px;
+            border-radius: 4px;
+            cursor: pointer
+        }
+
+        .box-pensil {
+            background-color: blue;
+            color: #fff;
+            cursor: pointer;
+            font-size: 15px;
+            padding-right: 10px;
+            padding-left: 10px;
+            padding-top: 2px;
+            padding-bottom: 2px;
+            border-radius: 4px
+        }
+    </style>
+    <script type='text/javascript'
+        src='https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-alpha1/dist/js/bootstrap.bundle.min.js'></script>
+    <script type='text/javascript'></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/validate.js/0.13.1/validate.min.js"></script>
+</head>
+
+
+
+<body oncontextmenu='return false' class='snippet-body'>
+    <div id="app">
+        <div class="container mt-5">
+            <div class="height-100 row d-flex justify-content-center align-items-center">
+                <div class="col-md-7">
+                    <div class="p-3 bg-white rounded">
+                        <div class="d-flex justify-content-between">
+                            <div class="d-flex flex-row align-items-center">
+                                <div class="position-relative">
+                                    <image v-bind:src="image" width="80" class="rounded-circle"> <span
+                                            class="position-absolute dots"></span>
+                                </div>
+                                <div class="ml-2">
+                                    <h5 class="mb-0">{{ name }}</h5> <span>{{ account }}</span>
+                                    <div class="d-flex flex-row"> <span class="mr-3">{{ countPost }} posts</span> <span
+                                            class="mr-3">{{ followers }} followers</span> <span>{{ following }}
+                                            following</span> </div>
+                                </div>
+                            </div>
+                            <div class="mt-2"> <span class="box-ellipse"><i class="fa fa-ellipsis-h"></i></span> <span
+                                    class="box-pensil"><i class="fa fa-pencil"></i></span> </div>
+                        </div>
+                    </div>
+                    <form @submit.prevent="checkForm">
+                        <div class="container w-2/5 p-8 mx-auto mt-10 border rounded-lg bg-white">
+                            <h1 class="text-2xl pt-4 pb-4">Registration Form</h1>
+                            <p v-if="errors" class="text-red-500">
+                                <b>Please correct the following error(s):</b>
+                                <ul>
+                                   <li v-for="error in errors" class="text-red-500">{{ error }}</li> 
+                                </ul>
+                            </p>
+                            <div class="grid grid-cols-2 gap-4">
+                                <div class="flex flex-col">
+                                    <label for="firstname" class="text-sm leading-7 text-gray-600">First Name</label>
+                                    <input type="text" id="firstname" v-model="firstname" name="firstname" class="bg-gray-100 rounded px-4 py-2 mb-4">
+                                </div>
+                                <div class="flex flex-col">
+                                    <label for="lastname" class="text-sm leading-7 text-gray-600">Last Name</label>
+                                    <input type="text" id="lastname" v-model="lastname" name="lastname" class="bg-gray-100 rounded px-4 py-2 mb-4">
+                                </div>
+                                <div class="flex flex-col">
+                                    <label for="age" class="text-sm leading-7 text-gray-600">Age</label>
+                                    <input type="text" id="age" v-model="age" name="age" class="bg-gray-100 rounded px-4 py-2 mb-4">
+                                </div>
+                                <div class="flex flex-col">
+                                    <label class="text-sm leading-7 text-gray-600">Gender</label>
+                                    <div class="flex flex-row pt-2 space-x-2">
+                                        <input type="radio" id="Male" v-model="gender" name="gender" value="M" class="bg-gray-100 rounded px-4 py-2 mb-4">
+                                        <label for="Male">Male</label>
+                                        <input type="radio" id="Female" v-model="gender" name="gender" value="F" class="bg-gray-100 rounded px-4 py-2 mb-4">
+                                        <label for="Female">Female</label>
+                                    </div>
+                                </div>
+                                <div class="flex flex-col">
+                                    <label for="email" class="text-sm leading-7 text-gray-600">Email</label>
+                                    <input type="text" id="email" v-model="email" name="email" class="bg-gray-100 rounded px-4 py-2 mb-4">
+                                </div>
+                                <div class="flex flex-col">
+                                    <label for="phone"class="text-sm leading-7 text-gray-600">Phone Number</label>
+                                    <input type="text" id="phone" v-model="phone" name="phone" class="bg-gray-100 rounded px-4 py-2 mb-4">
+                                </div>
+                                <div >
+                                    <input type="submit" value="Submit" class="px-8 py-2 text-white bg-green-500 rounded-lg hover:bg-green-600 focus:shadow-outline focus:outline-none focus:ring-2 ring-offset-current ring-offset-2">
+                                </div>
+                            </div>
+                        </div>                            
+                      </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+<script src="./profile.js"></script>
+
+</html>
